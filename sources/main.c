@@ -12,7 +12,23 @@
 
 #include "filler.h"
 
-int			main()
+int			ft_check_plateau_n_pice()
 {
+	ft_parse_plateau_size(); //todo cannot be 0
+	ft_parse_map();
+	ft_check_plateau_map();
+	ft_parse_piece_size(); //todo cannot be 0
+	ft_parse_peice();
+}
 
+int			main(void)
+{
+	ft_parse_player();
+	while (ft_check_plateau_n_pice() == TRUE)
+	{
+		//count coords
+		//print coords
+		//free struct
+	}
+	return (0);
 }
