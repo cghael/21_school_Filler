@@ -1,6 +1,16 @@
 cmake_minimum_required(VERSION 3.16)
-project(21_school_Filler C)
+project(filler C)
 
 set(CMAKE_C_STANDARD 90)
 
-add_executable(21_school_Filler sources/main.c includes/filler.h)
+set(SOURCES sources/main.c)
+
+add_executable(filler ${SOURCES})
+
+include_directories(includes)
+include_directories(ft_printf/includes)
+include_directories(ft_printf/libft/inc)
+
+add_subdirectory(ft_printf)
+
+target_link_libraries(filler libftprintf)

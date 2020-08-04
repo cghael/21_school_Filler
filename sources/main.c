@@ -10,11 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "filler.h"
 
-int
-main()
+int			main()
 {
-	printf("Hello, World!\n");
-	return 0;
+
 }
