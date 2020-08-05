@@ -19,4 +19,11 @@
 # include "ft_printf.h"
 # include "ft_get_next_line.h"
 
+typedef struct		s_filler
+{
+	char			player;
+}					t_filler;
+
+t_filler			*ft_parse_player(void);
+
 #endif

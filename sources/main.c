@@ -23,7 +23,9 @@ int			ft_check_plateau_n_pice()
 
 int			main(void)
 {
-	ft_parse_player();
+	t_filler	*filler;
+
+	filler = ft_parse_player();
 	while (ft_check_plateau_n_pice() == TRUE)
 	{
 		//count coords
