@@ -15,6 +15,7 @@
 
 # define TRUE		1
 # define FALSE		0
+# define FD			0
 
 # include "ft_printf.h"
 # include "ft_get_next_line.h"
@@ -24,6 +25,6 @@ typedef struct		s_filler
 	char			player;
 }					t_filler;
 
-t_filler			*ft_parse_player(void);
+t_filler			*ft_parse_player(int fd);
 
 #endif

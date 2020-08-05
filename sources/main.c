@@ -12,21 +12,27 @@
 
 #include "filler.h"
 
-int			ft_check_plateau_n_pice()
+#include <fcntl.h>
+
+int			ft_check_plateau_n_piece()
 {
-	ft_parse_plateau_size(); //todo cannot be 0
-	ft_parse_map();
-	ft_check_plateau_map();
-	ft_parse_piece_size(); //todo cannot be 0
-	ft_parse_peice();
+//	ft_parse_plateau_size(); //todo cannot be 0
+//	ft_parse_map();
+//	ft_check_plateau_map();
+//	ft_parse_piece_size(); //todo cannot be 0
+//	ft_parse_peice();
+	return (1);
 }
 
 int			main(void)
 {
 	t_filler	*filler;
 
-	filler = ft_parse_player();
-	while (ft_check_plateau_n_pice() == TRUE)
+		int fd;
+		fd = open("/Users/cghael/21_school_Filler/test", O_RDONLY);
+
+	filler = ft_parse_player(fd); //todo FD
+	while (ft_check_plateau_n_piece() == TRUE)
 	{
 		//count coords
 		//print coords
