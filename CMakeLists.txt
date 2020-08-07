@@ -3,7 +3,7 @@ project(filler C)
 
 set(CMAKE_C_STANDARD 90)
 
-set(SOURCES sources/main.c sources/ft_parse_player.c)
+set(SOURCES sources/main.c sources/ft_parse_player.c sources/ft_parse_plateau_size.c)
 
 add_executable(filler ${SOURCES})
 

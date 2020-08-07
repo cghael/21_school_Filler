@@ -16,6 +16,8 @@ static void			ft_valid_player(t_filler **filler, char *line)
 {
 	char **str;
 
+	if (5 != ft_word_count(line, ' '))
+		ft_error_exit("Error\n", NULL);
 	str = ft_strsplit(line, ' ');
 	if (!str)
 		ft_error_exit("Error in ft_strsplit()\n", NULL);
@@ -28,15 +30,17 @@ static void			ft_valid_player(t_filler **filler, char *line)
 		(*filler)->player = 'X';
 	else
 		ft_error_exit("Error\n", NULL);
+	ft_free_two_dem_str(str);
 }
 
-static t_filler		*ft_create_filler(void)
+static t_filler		*ft_create_filler(int fd)
 {
 	t_filler *tmp;
 
 	tmp = ft_memalloc(sizeof(t_filler));
 	if (!tmp)
 		ft_error_exit("Error malloc ft_create_filler()\n", NULL);
+	tmp->fd = fd;
 	return (tmp);
 }
 
@@ -46,8 +50,8 @@ t_filler			*ft_parse_player(int fd)
 	char		*line;
 	int			res;
 
-	filler = ft_create_filler();
-	if ((res = ft_get_next_line(fd, &line)) > 0)
+	filler = ft_create_filler(fd);
+	if ((res = ft_get_next_line(filler->fd, &line)) > 0)
 	{
 		ft_valid_player(&filler, line);
 		free(line);

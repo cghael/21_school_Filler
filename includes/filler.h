@@ -23,6 +23,7 @@
 typedef struct		s_filler
 {
 	char			player;
+	int				fd;
 }					t_filler;
 
 t_filler			*ft_parse_player(int fd);

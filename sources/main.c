@@ -14,7 +14,7 @@
 
 #include <fcntl.h>
 
-int			ft_check_plateau_n_piece()
+int			ft_check_plateau_n_piece(t_filler **filler)
 {
 //	ft_parse_plateau_size(); //todo cannot be 0
 //	ft_parse_map();
@@ -32,7 +32,7 @@ int			main(void)
 		fd = open("/Users/cghael/21_school_Filler/test", O_RDONLY);
 
 	filler = ft_parse_player(fd); //todo FD
-	while (ft_check_plateau_n_piece() == TRUE)
+	while (ft_check_plateau_n_piece(&filler) == TRUE)
 	{
 		//count coords
 		//print coords
@@ -40,3 +40,4 @@ int			main(void)
 	}
 	return (0);
 }
+
