@@ -14,18 +14,39 @@
 #define FILLER_H
 
 # define TRUE		1
+# define ERROR		"Error: Bad input\n"
 # define FALSE		0
 # define FD			0
+# define FREE		'.'
 
 # include "ft_printf.h"
 # include "ft_get_next_line.h"
 
+typedef struct		s_point
+{
+	char			name;
+	int				num;
+}					t_point;
+
+typedef struct		s_plat
+{
+	int				h;
+	int				w;
+	t_point			**coord;
+}					t_plat;
+
 typedef struct		s_filler
 {
+
 	char			player;
 	int				fd;
+	t_plat			map;
 }					t_filler;
 
 t_filler			*ft_parse_player(int fd);
+int					ft_parse_plateau_size(t_filler *filler);
+int					ft_create_map(t_filler *filler);
+int					ft_error_msg(char *str);
+int					ft_parse_map(t_filler *filler);
 
 #endif

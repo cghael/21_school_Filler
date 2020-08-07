@@ -14,9 +14,15 @@
 
 #include <fcntl.h>
 
-int			ft_check_plateau_n_piece(t_filler **filler)
+int			ft_check_plateau_n_piece(t_filler *filler)
 {
-//	ft_parse_plateau_size(); //todo cannot be 0
+	if (ft_parse_plateau_size(filler) < 0 || \
+		ft_create_map(filler) < 0 || \
+		ft_parse_map(filler) < 0)
+	{
+		//todo free filler
+		return (ft_error_msg(ERROR));
+	}
 //	ft_parse_map();
 //	ft_check_plateau_map();
 //	ft_parse_piece_size(); //todo cannot be 0
@@ -28,16 +34,16 @@ int			main(void)
 {
 	t_filler	*filler;
 
-		int fd;
-		fd = open("/Users/cghael/21_school_Filler/test", O_RDONLY);
-
-	filler = ft_parse_player(fd); //todo FD
-	while (ft_check_plateau_n_piece(&filler) == TRUE)
+		int fd; //todo del
+		fd = open("/Users/cghael/21_school_Filler/test", O_RDONLY); //todo del
+	if (!(filler = ft_parse_player(fd))) //todo FD
+		return (ft_error_msg(ERROR));
+	while (ft_check_plateau_n_piece(filler) > 0)
 	{
 		//count coords
 		//print coords
 		//free struct
 	}
-	return (0);
+	return (1);
 }
 
