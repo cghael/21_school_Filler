@@ -16,17 +16,15 @@
 
 int			ft_check_plateau_n_piece(t_filler *filler)
 {
-	if (ft_parse_plateau_size(filler) < 0 || \
-		ft_create_map(filler) < 0 || \
-		ft_parse_map(filler) < 0)
+	if (ft_parse_plateau_size(filler) < 0 \
+		|| ft_create_map(filler) < 0 \
+		|| ft_parse_map(filler) < 0 \
+		|| ft_parse_piece_size(filler) < 0 \
+		||ft_parse_piece(filler) < 0)
 	{
 		//todo free filler
 		return (ft_error_msg(ERROR));
 	}
-//	ft_parse_map();
-//	ft_check_plateau_map();
-//	ft_parse_piece_size(); //todo cannot be 0
-//	ft_parse_peice();
 	return (1);
 }
 

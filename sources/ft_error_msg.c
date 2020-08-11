@@ -25,5 +25,5 @@ int		ft_error_msg(char *str)
 			i++;
 		}
 	}
-	return (1);
+	return (-1);
 }

@@ -24,7 +24,13 @@ int			ft_create_map(t_filler *filler)
 	{
 		if (!(filler->map.coord[i] = (t_point*)ft_memalloc(sizeof(t_point) * \
 																filler->map.w)))
+		{
+			while (--i > 0)
+				free(filler->map.coord[i]);
+			free(filler->map.coord);
+			filler->map.coord = NULL;
 			return (-1);
+		}
 		filler->map.coord[i]->name = FREE;
 		filler->map.coord[i]->num = 0;
 		i++;

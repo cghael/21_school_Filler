@@ -35,12 +35,21 @@ typedef struct		s_plat
 	t_point			**coord;
 }					t_plat;
 
+typedef struct		s_piece
+{
+	int				h;
+	int				w;
+	char			**coord;
+}					t_piece;
+
 typedef struct		s_filler
 {
 
 	char			player;
+	char			enemy;
 	int				fd;
 	t_plat			map;
+	t_piece			token;
 }					t_filler;
 
 t_filler			*ft_parse_player(int fd);
@@ -48,5 +57,8 @@ int					ft_parse_plateau_size(t_filler *filler);
 int					ft_create_map(t_filler *filler);
 int					ft_error_msg(char *str);
 int					ft_parse_map(t_filler *filler);
+int					ft_parse_piece_size(t_filler *filler);
+int					ft_check_numbers_or_colon(const char *str, int c_flag);
+int					ft_parse_piece(t_filler *filler);
 
 #endif

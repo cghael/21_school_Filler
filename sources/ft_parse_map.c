@@ -12,62 +12,47 @@
 
 #include "filler.h"
 
-static int	ft_check_n_write_players(t_filler *filler, char *line, int j)
+static int	ft_get_plateau_line(t_filler *filler, char *line, int j)
 {
-	size_t	i;
+	int i;
 
 	i = 0;
-	while(*line)
+	while (line[i])
 	{
-		if (*line != '.')
-		{
-			if (*line != 'X' && *line != 'O' && *line != 'x' && *line != 'o')
-				return (-1);
-			filler->map.coord[j][i].name = *line;
-		}
-		line++;
+		if (ft_toupper(line[i]) == filler->player)
+			filler->map.coord[j][i].name = filler->player;
+		else if (ft_toupper(line[i]) == filler->enemy)
+			filler->map.coord[j][i].name = filler->enemy;
+		else if (line[i] != '.')
+			return (-1);
+		i++;
 	}
-	return (0);
-}
-
-static int	ft_find_players(t_filler *filler, char *line, int j)
-{
-	char *tmp;
-
-	if (ft_word_count(line, ' ') != 2)
-		return (-1);
-	if (!(tmp = ft_strchr(line, ' ')))
-		return (-1);
-	tmp++;
-	if (ft_strlen(tmp) != filler->map.w)
-		return (-1);
-	if (ft_check_n_write_players(filler, tmp, j) < 0)
-		return (-1);
 	return (0);
 }
 
 int			ft_parse_map(t_filler *filler)
 {
 	char	*line;
-	int		res;
 	int		i;
 
+	if (ft_get_next_line(filler->fd, &line) != 1 \
+		|| (int)ft_strlen(line) != filler->map.w + 4)
+	{
+		ft_strdel(&line);
+		return (-1);
+	}
+	ft_strdel(&line);
 	i = 0;
 	while (i < filler->map.h)
 	{
-		if ((res = ft_get_next_line(filler->fd, &line)) > 0)
+		if (ft_get_next_line(filler->fd, &line) != 1 \
+			|| (int)ft_strlen(line) != filler->map.w + 4 \
+			|| ft_get_plateau_line(filler, &line[4], i) < 0)
 		{
-			if (i > 0 && ft_find_players(filler, line, i) < 0)
-			{
-				free(line);
-				return (-1);
-			}
-			free(line);
-		}
-		if (res == 0)
-			free(line);
-		if (res < 0)
+			ft_strdel(&line);
 			return (-1);
+		}
+		ft_strdel(&line);
 		i++;
 	}
 	return (0);

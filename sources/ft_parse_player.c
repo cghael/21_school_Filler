@@ -12,31 +12,25 @@
 
 #include "filler.h"
 
-static int			ft_valid_player(t_filler **filler, char *line)
+static int			ft_valid_player(t_filler *filler, char **str)
 {
-	char	**str;
-
-	if (5 != ft_word_count(line, ' '))
-		return (-1);
-	str = ft_strsplit(line, ' ');
-	if (!str)
-		return (-1);
-	if (!ft_strequ(str[0], "$$$") || !ft_strequ(str[1], "exec") \
+	if (!ft_strequ(str[0], "$$$") \
+		|| !ft_strequ(str[1], "exec") \
 		|| !ft_strequ(str[4], "[cghael.filler]"))
 	{
 		ft_free_two_dem_str(str);
 		return (-1);
 	}
 	if (ft_strequ(str[2], "p1"))
-		(*filler)->player = 'O';
+		filler->player = 'O';
 	else if (ft_strequ(str[2], "p2"))
-		(*filler)->player = 'X';
+		filler->player = 'X';
 	else
 	{
 		ft_free_two_dem_str(str);
 		return (-1);
 	}
-	ft_free_two_dem_str(str);
+	filler->enemy = (filler->player == 'O') ? 'X' : 'O';
 	return (0);
 }
 
@@ -55,22 +49,19 @@ t_filler			*ft_parse_player(int fd)
 {
 	t_filler	*filler;
 	char		*line;
-	int			res;
+	char		**str;
 
 	if (!(filler = ft_create_filler(fd)))
 		return (NULL);
-	if ((res = ft_get_next_line(filler->fd, &line)) > 0)
+	if (ft_get_next_line(filler->fd, &line) != 1 \
+		|| ft_word_count(line, ' ') != 5 \
+		|| !(str = ft_strsplit(line, ' ')) \
+		|| ft_valid_player(filler, str) < 0)
 	{
-		if (ft_valid_player(&filler, line) < 0)
-		{
-			free(line);
-			return (NULL);
-		}
-		free(line);
-	}
-	if (res == 0)
-		free(line);
-	if (res < 0)
+		ft_strdel(&line);
 		return (NULL);
+	}
+	ft_strdel(&line);
+	ft_free_two_dem_str(str);
 	return (filler);
 }
