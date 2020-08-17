@@ -25,7 +25,7 @@ int			ft_check_plateau_n_piece(t_filler *filler)
 		ft_free_filler(filler);
 		return (ft_error_msg(ERROR));
 	}
-	return (1);
+	return (TRUE);
 }
 
 int			main(void)
@@ -36,10 +36,10 @@ int			main(void)
 		fd = open("/Users/cghael/21_school_Filler/test", O_RDONLY); //todo del
 	if (!(filler = ft_parse_player(fd))) //todo FD
 		return (ft_error_msg(ERROR));
-	while (ft_check_plateau_n_piece(filler) > 0)
+	while (TRUE == ft_check_plateau_n_piece(filler))
 	{
-		//ft_make_map(filler);
-		//ft_count_coords(filler);
+		ft_make_map(filler);
+		ft_count_coords(filler);
 		//ft_print_coords(filler);
 		ft_free_filler(filler);
 	}

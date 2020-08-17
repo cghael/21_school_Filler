@@ -12,28 +12,40 @@
 
 #include "filler.h"
 
-int			ft_create_map(t_filler *filler)
+static void	ft_fill_map(t_filler *filler, unsigned int j)
 {
-	unsigned int	i;
+	int i;
 
 	i = 0;
+	while (i < filler->map.w)
+	{
+		filler->map.coord[j][i].name = FREE;
+		filler->map.coord[j][i].num = 0;
+		i++;
+	}
+}
+
+int			ft_create_map(t_filler *filler)
+{
+	unsigned int	j;
+
+	j = 0;
 	if (!(filler->map.coord = (t_point**)ft_memalloc(sizeof(t_point*) * \
 																filler->map.h)))
 		return (-1);
-	while (i < filler->map.h)
+	while (j < filler->map.h)
 	{
-		if (!(filler->map.coord[i] = (t_point*)ft_memalloc(sizeof(t_point) * \
+		if (!(filler->map.coord[j] = (t_point*)ft_memalloc(sizeof(t_point) * \
 																filler->map.w)))
 		{
-			while (--i > 0)
-				free(filler->map.coord[i]);
+			while (--j > 0)
+				free(filler->map.coord[j]);
 			free(filler->map.coord);
 			filler->map.coord = NULL;
 			return (-1);
 		}
-		filler->map.coord[i]->name = FREE;
-		filler->map.coord[i]->num = 0;
-		i++;
+		ft_fill_map(filler, j);
+		j++;
 	}
 	return (0);
 }

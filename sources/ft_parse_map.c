@@ -12,6 +12,25 @@
 
 #include "filler.h"
 
+//void		ft_print_map(t_plat map) //todo del
+//{
+//	int i;
+//	int j;
+//
+//	j = 0;
+//	while (j < map.h)
+//	{
+//		i = 0;
+//		while (i < map.w)
+//		{
+//			ft_printf("%d", map.coord[j][i].num);
+//			i++;
+//		}
+//		j++;
+//		ft_printf("\n");
+//	}
+//}
+
 static int	ft_get_plateau_line(t_filler *filler, char *line, int j)
 {
 	int i;
@@ -55,5 +74,6 @@ int			ft_parse_map(t_filler *filler)
 		ft_strdel(&line);
 		i++;
 	}
+//	ft_print_map(filler->map); //todo del
 	return (0);
 }

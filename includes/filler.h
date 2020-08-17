@@ -61,5 +61,7 @@ int					ft_parse_piece_size(t_filler *filler);
 int					ft_check_numbers_or_colon(const char *str, int c_flag);
 int					ft_parse_piece(t_filler *filler);
 void				ft_free_filler(t_filler *filler);
+void				ft_make_map(t_filler *filler);
+void				ft_count_coords(t_filler *filler);
 
 #endif

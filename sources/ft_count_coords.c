@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error_msg.c                                     :+:      :+:    :+:   */
+/*   ft_count_coords.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cghael <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/07 15:23:16 by cghael            #+#    #+#             */
-/*   Updated: 2020/08/07 15:23:18 by cghael           ###   ########.fr       */
+/*   Created: 2020/08/17 15:41:25 by cghael            #+#    #+#             */
+/*   Updated: 2020/08/17 15:41:27 by cghael           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-int		ft_error_msg(char *str)
+void			ft_count_coords(t_filler *filler)
 {
-	size_t i;
 
-	i = 0;
-	if (str)
-	{
-		while(str[i])
-		{
-			write(2, &str[i], 1);
-			i++;
-		}
-	}
-	return (FALSE);
 }
