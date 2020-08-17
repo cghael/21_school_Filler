@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error_msg.c                                     :+:      :+:    :+:   */
+/*   ft_free_filler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cghael <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/07 15:23:16 by cghael            #+#    #+#             */
-/*   Updated: 2020/08/07 15:23:18 by cghael           ###   ########.fr       */
+/*   Created: 2020/08/17 12:04:16 by cghael            #+#    #+#             */
+/*   Updated: 2020/08/17 12:04:18 by cghael           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-int		ft_error_msg(char *str)
+void		ft_free_filler(t_filler *filler)
 {
-	size_t i;
-
-	i = 0;
-	if (str)
+	while (filler->map.h)
 	{
-		while(str[i])
-		{
-			write(2, &str[i], 1);
-			i++;
-		}
+		free(filler->map.coord[filler->map.h - 1]);
+		filler->map.h--;
 	}
-	return (-1);
+	free(filler->map.coord);
+	while (filler->token.h)
+	{
+		free(filler->token.coord[filler->token.h - 1]);
+		filler->token.h--;
+	}
+	free(filler->token.coord);
+	free(filler);
 }

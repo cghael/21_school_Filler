@@ -20,9 +20,9 @@ int			ft_check_plateau_n_piece(t_filler *filler)
 		|| ft_create_map(filler) < 0 \
 		|| ft_parse_map(filler) < 0 \
 		|| ft_parse_piece_size(filler) < 0 \
-		||ft_parse_piece(filler) < 0)
+		|| ft_parse_piece(filler) < 0)
 	{
-		//todo free filler
+		ft_free_filler(filler);
 		return (ft_error_msg(ERROR));
 	}
 	return (1);
@@ -38,9 +38,10 @@ int			main(void)
 		return (ft_error_msg(ERROR));
 	while (ft_check_plateau_n_piece(filler) > 0)
 	{
-		//count coords
-		//print coords
-		//free struct
+		//ft_make_map(filler);
+		//ft_count_coords(filler);
+		//ft_print_coords(filler);
+		ft_free_filler(filler);
 	}
 	return (1);
 }
