@@ -24,12 +24,14 @@ int				ft_parse_piece_size(t_filler *filler)
 	char	*line;
 	char	**str;
 
+	str = NULL;
 	if (ft_get_next_line(filler->fd, &line) != 1 \
 		|| ft_word_count(line, ' ') != 3 \
 		|| !(str = ft_strsplit(line, ' '))
 		|| ft_valid_piece_size(filler, str) < 0)
 	{
 		ft_strdel(&line);
+		ft_free_two_dem_str(str);
 		return (-1);
 	}
 	ft_strdel(&line);

@@ -51,6 +51,7 @@ t_filler			*ft_parse_player(int fd)
 	char		*line;
 	char		**str;
 
+	str = NULL;
 	if (!(filler = ft_create_filler(fd)))
 		return (NULL);
 	if (ft_get_next_line(filler->fd, &line) != 1 \
@@ -59,6 +60,7 @@ t_filler			*ft_parse_player(int fd)
 		|| ft_valid_player(filler, str) < 0)
 	{
 		ft_strdel(&line);
+		ft_free_two_dem_str(str);
 		return (NULL);
 	}
 	ft_strdel(&line);

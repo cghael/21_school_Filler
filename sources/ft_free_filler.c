@@ -16,15 +16,22 @@ void		ft_free_filler(t_filler *filler)
 {
 	while (filler->map.h)
 	{
-		free(filler->map.coord[filler->map.h - 1]);
+		if (filler->map.coord[filler->map.h - 1])
+			free(filler->map.coord[filler->map.h - 1]);
+		filler->map.coord[filler->map.h - 1] = NULL;
 		filler->map.h--;
 	}
-	free(filler->map.coord);
+	if (filler->map.coord)
+		free(filler->map.coord);
+	filler->map.coord = NULL;
 	while (filler->token.h)
 	{
-		free(filler->token.coord[filler->token.h - 1]);
+		if (filler->token.coord[filler->token.h - 1])
+			free(filler->token.coord[filler->token.h - 1]);
+		filler->token.coord[filler->token.h - 1] = NULL;
 		filler->token.h--;
 	}
-	free(filler->token.coord);
-	free(filler);
+	if (filler->token.coord)
+		free(filler->token.coord);
+	filler->token.coord = NULL;
 }

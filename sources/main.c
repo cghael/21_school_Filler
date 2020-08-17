@@ -43,6 +43,7 @@ int			main(void)
 		//ft_print_coords(filler);
 		ft_free_filler(filler);
 	}
+	free(filler);
 	return (1);
 }
 
