@@ -22,6 +22,12 @@
 # include "ft_printf.h"
 # include "ft_get_next_line.h"
 
+typedef struct		s_coord
+{
+	int				x;
+	int				y;
+}					t_coord;
+
 typedef struct		s_point
 {
 	char			name;
