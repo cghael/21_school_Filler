@@ -12,51 +12,54 @@
 
 #include "filler.h"
 
-static void		ft_check_for_min(t_filler *filler, int y, int x, int sqr)
+static void		ft_check_for_min(t_filler *filler, t_coord delta, int sqr)
 {
 	if (filler->token.min_sqr == 0 || filler->token.min_sqr > sqr)
 	{
 		filler->token.min_sqr = sqr;
-		filler->token.min_x = x;
-		filler->token.min_y = y;
+		filler->token.min_x = delta.x;
+		filler->token.min_y = delta.y;
 	}
 }
 
-static int		ft_can_token_stand(t_filler *filler, int y, int x, t_coord p_token)
+static int		ft_check_map_size_n_free_point(t_filler *filler, \
+													t_coord delta, t_coord tmp)
 {
-	int i;
-	int j;
-	int	sqr;
+	if (((delta.y + tmp.y < 0 \
+		|| delta.x + tmp.x < 0 \
+		|| delta.y + tmp.y >= filler->map.h \
+		|| delta.x + tmp.x >= filler->map.w) \
+		|| (filler->map.coord[delta.y + tmp.y][delta.x + tmp.x].name != FREE)))
+		return (TRUE);
+	return (FALSE);
+}
+
+static int		ft_can_token_stand(t_filler *filler, t_coord delta, \
+																t_coord p_token)
+{
+	int		sqr;
+	t_coord	tmp;
 
 	sqr = 0;
-	j = 0;
-	while (j < filler->token.h)
+	tmp.y = 0;
+	while (tmp.y < filler->token.h)
 	{
-		i = 0;
-		while (i < filler->token.w)
+		tmp.x = 0;
+		while (tmp.x < filler->token.w)
 		{
-			if (i != p_token.x || j != p_token.y)
+			if ((tmp.x != p_token.x || tmp.y != p_token.y) \
+				&& filler->token.coord[tmp.y][tmp.x] == '*')
 			{
-				if (filler->token.coord[j][i] == '*' &&
-					((y + j < 0 || x + i < 0 || \
-				y + j >= filler->map.h || x + i >= filler->map.w) \
-				|| (filler->map.coord[y + j][x + i].name != FREE) \
-				|| (i == p_token.x && j == p_token.y)))
+				if (ft_check_map_size_n_free_point(filler, delta, tmp))
 					return (FALSE);
-				else if (filler->token.coord[j][i] == '*' && filler->map.coord[y + j][x + i].name == FREE)
-					sqr += filler->map.coord[y + j][x + i].num;
+				else if (filler->map.coord[delta.y + tmp.y]\
+												[delta.x + tmp.x].name == FREE)
+					sqr += filler->map.coord[delta.y + tmp.y]\
+														[delta.x + tmp.x].num;
 			}
-//			if (filler->token.coord[j][i] == '*' &&
-//				((y + j < 0 || x + i < 0 || \
-//				y + j >= filler->map.h || x + i >= filler->map.w) \
-//				|| (filler->map.coord[y + j][x + i].name != FREE) \
-//				|| (i == p_token.x && j == p_token.y)))
-//				return (FALSE);
-//			else if (filler->token.coord[j][i] == '*' && filler->map.coord[y + j][x + i].name == FREE)
-//				sqr += filler->map.coord[y + j][x + i].num;
-			i++;
+			tmp.x++;
 		}
-		j++;
+		tmp.y++;
 	}
 	return (sqr);
 }
@@ -65,6 +68,7 @@ static void		ft_put_token(t_filler *filler, t_coord p_map)
 {
 	t_coord	p_token;
 	int		sqr;
+	t_coord	delta;
 
 	p_token.y = 0;
 	while (p_token.y < filler->token.h)
@@ -74,9 +78,11 @@ static void		ft_put_token(t_filler *filler, t_coord p_map)
 		{
 			if (filler->token.coord[p_token.y][p_token.x] == '*')
 			{
-				sqr = ft_can_token_stand(filler, p_map.y - p_token.y, p_map.x - p_token.x, p_token);
+				delta.x = p_map.x - p_token.x;
+				delta.y = p_map.y - p_token.y;
+				sqr = ft_can_token_stand(filler, delta, p_token);
 				if (sqr)
-					ft_check_for_min(filler, p_map.y - p_token.y, p_map.x - p_token.x, sqr);
+					ft_check_for_min(filler, delta, sqr);
 			}
 			p_token.x++;
 		}
@@ -89,6 +95,8 @@ void			ft_count_coords(t_filler *filler)
 	t_coord	p_map;
 
 	filler->token.min_sqr = 0;
+	filler->token.min_x = 0;
+	filler->token.min_y = 0;
 	p_map.y = 0;
 	while (p_map.y < filler->map.h)
 	{

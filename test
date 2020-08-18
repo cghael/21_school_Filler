@@ -20,5 +20,9 @@ Piece 1 3:
 ***
 
 
+ ./filler_vm -f maps/map00 -p1 ./cghael.filler -p2 players/carli.filler
+ ./filler_vm -f maps/map00 -p1 players/carli.filler -p2 ./cghael.filler
+
+
 
 

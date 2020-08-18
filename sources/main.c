@@ -23,7 +23,7 @@ int			ft_check_plateau_n_piece(t_filler *filler)
 		|| ft_parse_piece(filler) < 0)
 	{
 		ft_free_filler(filler);
-		return (ft_error_msg(ERROR));
+		return (FALSE);
 	}
 	return (TRUE);
 }
