@@ -12,8 +12,6 @@
 
 #include "filler.h"
 
-#include <fcntl.h>
-
 int			ft_check_plateau_n_piece(t_filler *filler)
 {
 	if (ft_parse_plateau_size(filler) < 0 \
@@ -32,8 +30,7 @@ int			main(void)
 {
 	t_filler	*filler;
 
-//		int fd; //todo deller/test", O_RDONLY); //todo del
-	if (!(filler = ft_parse_player(FD))) //todo FD
+	if (!(filler = ft_parse_player(FD)))
 		return (ft_error_msg(ERROR));
 	while (TRUE == ft_check_plateau_n_piece(filler))
 	{
@@ -45,4 +42,3 @@ int			main(void)
 	free(filler);
 	return (1);
 }
-

@@ -19,7 +19,7 @@ int		ft_error_msg(char *str)
 	i = 0;
 	if (str)
 	{
-		while(str[i])
+		while (str[i])
 		{
 			write(2, &str[i], 1);
 			i++;

@@ -17,19 +17,13 @@ static int			ft_valid_player(t_filler *filler, char **str)
 	if (!ft_strequ(str[0], "$$$") \
 		|| !ft_strequ(str[1], "exec") \
 		|| !ft_strstr(str[4], "cghael.filler"))
-	{
-		ft_free_two_dem_str(str);
 		return (-1);
-	}
 	if (ft_strequ(str[2], "p1"))
 		filler->player = 'O';
 	else if (ft_strequ(str[2], "p2"))
 		filler->player = 'X';
 	else
-	{
-		ft_free_two_dem_str(str);
 		return (-1);
-	}
 	filler->enemy = (filler->player == 'O') ? 'X' : 'O';
 	return (0);
 }

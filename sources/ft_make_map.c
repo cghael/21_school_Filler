@@ -40,25 +40,6 @@ static int	ft_put_step(t_filler *filler, int j, int i, int step)
 	return (flag);
 }
 
-//void		ft_print_map(t_plat map) //todo del
-//{
-//	int i;
-//	int j;
-//
-//	j = 0;
-//	while (j < map.h)
-//	{
-//		i = 0;
-//		while (i < map.w)
-//		{
-//			ft_printf("%4d", map.coord[j][i].num);
-//			i++;
-//		}
-//		j++;
-//		ft_printf("\n");
-//	}
-//}
-
 static int	ft_put_numb_on_map(t_filler *filler, int j, int i, int step)
 {
 	int flag;
@@ -96,5 +77,4 @@ void		ft_make_map(t_filler *filler)
 		}
 		step++;
 	}
-//	ft_print_map(filler->map); //todo del
 }

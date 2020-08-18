@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #ifndef FILLER_H
-#define FILLER_H
+# define FILLER_H
 
 # define TRUE		1
 # define ERROR		"Error: Bad input\n"
