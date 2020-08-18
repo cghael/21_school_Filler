@@ -46,6 +46,9 @@ typedef struct		s_piece
 	int				h;
 	int				w;
 	char			**coord;
+	int				min_y;
+	int				min_x;
+	int				min_sqr;
 }					t_piece;
 
 typedef struct		s_filler

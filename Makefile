@@ -32,7 +32,17 @@ HEADERS = $(addprefix $(HEADERS_DIR), $(HEADERS_LIST))
 
 SRC_DIR = sources/
 SRC_LIST = main.c \
-			ft_parse_player.c
+			ft_parse_player.c \
+			ft_parse_plateau_size.c \
+			ft_parse_piece_size.c \
+			ft_parse_piece.c \
+			ft_parse_map.c \
+			ft_make_map.c \
+			ft_free_filler.c \
+			ft_error_msg.c \
+			ft_create_map.c \
+			ft_count_coords.c \
+			ft_check_numbers_or_colon.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
 

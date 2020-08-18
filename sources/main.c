@@ -32,15 +32,14 @@ int			main(void)
 {
 	t_filler	*filler;
 
-		int fd; //todo del
-		fd = open("/Users/cghael/21_school_Filler/test", O_RDONLY); //todo del
-	if (!(filler = ft_parse_player(fd))) //todo FD
+//		int fd; //todo deller/test", O_RDONLY); //todo del
+	if (!(filler = ft_parse_player(FD))) //todo FD
 		return (ft_error_msg(ERROR));
 	while (TRUE == ft_check_plateau_n_piece(filler))
 	{
 		ft_make_map(filler);
 		ft_count_coords(filler);
-		//ft_print_coords(filler);
+		ft_printf("%d %d\n", filler->token.min_y, filler->token.min_x);
 		ft_free_filler(filler);
 	}
 	free(filler);

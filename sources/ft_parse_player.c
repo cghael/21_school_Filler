@@ -16,7 +16,7 @@ static int			ft_valid_player(t_filler *filler, char **str)
 {
 	if (!ft_strequ(str[0], "$$$") \
 		|| !ft_strequ(str[1], "exec") \
-		|| !ft_strequ(str[4], "[cghael.filler]"))
+		|| !ft_strstr(str[4], "cghael.filler"))
 	{
 		ft_free_two_dem_str(str);
 		return (-1);

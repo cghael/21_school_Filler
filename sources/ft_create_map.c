@@ -27,7 +27,7 @@ static void	ft_fill_map(t_filler *filler, unsigned int j)
 
 int			ft_create_map(t_filler *filler)
 {
-	unsigned int	j;
+	int	j;
 
 	j = 0;
 	if (!(filler->map.coord = (t_point**)ft_memalloc(sizeof(t_point*) * \
